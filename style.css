@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+* {
+    font-family: "Noto Sans KR";
+}
+
+button {
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.ball {
+    border-radius: 5px;
+    position: fixed;
+    background: black;
+    z-index: 5;
+}
+
+.ballLabel {
+    position: fixed;
+    z-index: 5;
+}
+
+.tree {
+    border-radius: 5px;
+    position: fixed;
+    background: green;
+    z-index: 5;
+}
+
+#pane, #pane * {
+    font-family: consolas;
+    font-size: 17px;
+}
+
+.noBackground {
+    background: none;
+    color: royalblue;
+    padding: 0;
+    margin: 0;
+}
+
+#resetBtn {
+    background: red;
+    color: white;
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+#resetBtn:hover {
+    background: darkred;
+    color: lightgray;
+}
+
+#developerPane {
+    padding: 20px;
+    display: inline-block;
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px black;
+    padding-left: 40px;
+    padding-right: 40px;
+    background: white;
+    z-index: 10;
+}
