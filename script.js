@@ -2,11 +2,11 @@ let tick = 0;
 let beforeTime = new Date();
 const display = domId('display');
 const pixel = 50;
-let goSec = 15;// go (goSec)px / 1 second
+let goSec = 10;// go (goSec)px / 1 second
 let dats = [];
 let fpsLogs = [];
 let target = 0;
-let minTick = 15;
+let minTick = 0;
 let direction = 'north';
 const objs = {
     Wall : {
@@ -40,8 +40,8 @@ const setMaxFps = (x)=>{
             right: kpf(39),
             down: kpf(40)
         };
-        const speed = tick * (goSec/1000);
         const useAwaitToMove = true;
+        const speed = tick * (goSec/1000) * (useAwaitToMove*2);
         const moves = async()=>{
             if (keys.left) {
                 direction = 'west';
@@ -80,6 +80,9 @@ const setMaxFps = (x)=>{
         const maxFps = Math.round(1000 / minTick);
         fpsLogs.push(fps);
         const averageFps = Math.round(fpsLogs.sum() / fpsLogs.length);
+        const max_recent = 100;
+        const r_arr = (fpsLogs.length>max_recent?fpsLogs.slice(fpsLogs.length-max_recent):fpsLogs);
+        const r_averageFps = Math.round(r_arr.sum() / r_arr.length);
 
         pane.html(`
         <div>
@@ -90,6 +93,7 @@ const setMaxFps = (x)=>{
             <button class='noBackground' onmouseup='setMaxFps(prompt("Input Value"))'>Set</button>
             <br>
             Average_FPS : ${averageFps} <br>
+            Recently_Avg_FPS : ${r_averageFps} <br>
             Player_SPEED : ${goSec} px/s <br>
             Direction : ${direction} <br>
             <meter max='${maxFps}' value='${fps}' low='30' optimum='40'></meter>
