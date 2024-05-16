@@ -1,27 +1,27 @@
 [
-    {
-        "type": "Player",
-        "x": 6.755,
-        "y": 6.48
-    },
-    {
-        "type": "Player",
-        "x": 1,
-        "y": 2
-    },
-    {
-        "type": "Player",
-        "x": 5,
-        "y": 8
-    },
-    {
-        "type": "Player",
-        "x": 10,
-        "y": 4
-    },
-    {
-        "type": "Tree",
-        "x": 5,
-        "y": 2
-    }
+  {
+    "type": "Player",
+    "x": 3,
+    "y": 5
+  },
+  {
+    "type": "Player",
+    "x": 1,
+    "y": 2
+  },
+  {
+    "type": "Player",
+    "x": 5,
+    "y": 8
+  },
+  {
+    "type": "Player",
+    "x": 10,
+    "y": 4
+  },
+  {
+    "type": "Tree",
+    "x": 5,
+    "y": 2
+  }
 ]

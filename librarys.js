@@ -227,3 +227,52 @@ function getOverlapRatio(a, b, axis) {
 
   return overlapRatio;
 }
+function isCollision(a, b) {
+  // 객체 a, b의 충돌 여부를 판단하는 함수입니다.
+  // 만약 충돌했다면 충돌 방향도 반환합니다.
+
+  // 객체 a, b의 바운딩 박스를 계산합니다.
+  const aBox = {
+    x1: a.x,
+    y1: a.y,
+    x2: a.x + a.w,
+    y2: a.y + a.h
+  };
+  const bBox = {
+    x1: b.x,
+    y1: b.y,
+    x2: b.x + b.w,
+    y2: b.y + b.h
+  };
+
+  // 충돌 여부를 판단합니다.
+  if (
+    aBox.x1 <= bBox.x2 &&
+    aBox.x2 >= bBox.x1 &&
+    aBox.y1 <= bBox.y2 &&
+    aBox.y2 >= bBox.y1
+  ) {
+    // 충돌했다면 충돌 방향을 계산합니다.
+    const dx = (aBox.x1 + aBox.x2) / 2 - (bBox.x1 + bBox.x2) / 2;
+    const dy = (aBox.y1 + aBox.y2) / 2 - (bBox.y1 + bBox.y2) / 2;
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+      // 수평 방향 충돌
+      if (dx > 0) {
+        return "right"; // 오른쪽에서 충돌
+      } else {
+        return "left"; // 왼쪽에서 충돌
+      }
+    } else {
+      // 수직 방향 충돌
+      if (dy > 0) {
+        return "bottom"; // 아래에서 충돌
+      } else {
+        return "top"; // 위에서 충돌
+      }
+    }
+  } else {
+    // 충돌하지 않았습니다.
+    return null;
+  }
+}

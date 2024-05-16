@@ -162,89 +162,16 @@ const moveY = async (target, value, option) => {
     const thisTarget = {
         ...dats[target]
     };
-    const clonedDats = [
-        ...dats
-    ];
-    thisTarget.y += value;
-    clonedDats[target] = null;
-    const crackExpected = (clonedDats.reduce((pre,cur)=>{
-        if(cur === null) return pre;
-        const size = objs[thisTarget.type]?.size;
-        const curSize = objs[cur.type]?.size;
-        return [...pre,isColliding({
-            ...thisTarget,
-            w: size, h: size
-        },
-        {
-            ...cur,
-            w: curSize, h: curSize
-        })]
-    },[]).some((v)=>v));
-    if(option?.noCollide&&crackExpected) {
-        const decreasing = clonedDats.reduce((pre,cur)=>{
-            if(cur === null) return pre;
-            const size = objs[thisTarget.type]?.size;
-            const curSize = objs[cur.type]?.size;
-            const overLap = getOverlapRatio({
-                ...thisTarget,
-                w: size, h: size
-            },
-            {
-                ...cur,
-                w: curSize, h: curSize
-            },'y');
-            return overLap>pre?overLap:pre;
-        },0);
-        thisTarget.y+=decreasing*(value<0?1:-1);
-        console.log(decreasing);
-    }
-    return await tp(target,thisTarget);
+    return await tp(target,{y:thisTarget.y+value});
 }
 const moveX = async (target, value, option) => {
     const thisTarget = {
         ...dats[target]
     };
-    const clonedDats = [
-        ...dats
-    ];
-    thisTarget.x += value;
-    clonedDats[target] = null;
-    const crackExpected = (clonedDats.reduce((pre,cur)=>{
-        if(cur === null) return pre;
-        const size = objs[thisTarget.type]?.size;
-        const curSize = objs[cur.type]?.size;
-        return [...pre,isColliding({
-            ...thisTarget,
-            w: size, h: size
-        },
-        {
-            ...cur,
-            w: curSize, h: curSize
-        })]
-    },[]).some((v)=>v));
-    if(option?.noCollide&&crackExpected) {
-        const decreasing = clonedDats.reduce((pre,cur)=>{
-            if(cur === null) return pre;
-            const size = objs[thisTarget.type]?.size;
-            const curSize = objs[cur.type]?.size;
-            const overLap = getOverlapRatio({
-                ...thisTarget,
-                w: size, h: size
-            },
-            {
-                ...cur,
-                w: curSize, h: curSize
-            },'x');
-            return overLap>pre?overLap:pre;
-        },0);
-        thisTarget.x+=decreasing*(value<0?1:-1);
-        console.log(decreasing);
-    }
-    thisTarget.x += value;
-    return await tp(target,thisTarget);
+    return await tp(target,{x:thisTarget.x+value});
 }
 const tp = async (target,dat) => {
-    return await fetch(`behave.php?target=${target}&&dat=${dat.json()}`);
+    return await fetch(`behave.php?target=${target}&&dat=${{...dats[target],...dat}.json()}`);
 }
 const reset = () => {
     try {
