@@ -24,10 +24,10 @@ button {
     z-index: 5;
 }
 
-.tree {
+.wall {
     border-radius: 5px;
     position: fixed;
-    background: green;
+    background: gray;
     z-index: 5;
 }
 

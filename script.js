@@ -2,14 +2,14 @@ let tick = 0;
 let beforeTime = new Date();
 const display = domId('display');
 const pixel = 50;
-let goSec = 5;// go (goSec)px / 1 second
+let goSec = 10;// go (goSec)px / 1 second
 let dats = [];
 let fpsLogs = [];
 let target = 0;
 let minTick = 15;
 let direction = 'north';
 const objs = {
-    Tree : {
+    Wall : {
         size: 2
     },
     Player : {
@@ -145,9 +145,9 @@ const frames = (dats) => {
             height: ${ballWidth*px}px;
             ' ></div>
             `
-        } else if(type === 'Tree') {
+        } else if(type === 'Wall') {
             html = `
-            <div class='tree' style='
+            <div class='wall' style='
             left: ${thisDat.x}px;
             top: ${thisDat.y}px;
             width: ${ballWidth*px}px;
