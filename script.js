@@ -41,26 +41,34 @@ const setMaxFps = (x)=>{
             down: kpf(40)
         };
         const speed = tick * (goSec/1000);
-        if (keys.left) {
-            direction = 'west';
-            moveX(target, -speed,{
-                noCollide: true
-            });
-        } else if (keys.right) {
-            direction = 'east';
-            moveX(target, speed,{
-                noCollide: true
-            });
-        } else if (keys.up) {
-            direction = 'north';
-            moveY(target, -speed,{
-                noCollide: true
-            });
-        } else if (keys.down) {
-            direction = 'south';
-            moveY(target, speed,{
-                noCollide: true
-            });
+        const useAwaitToMove = true;
+        const moves = async()=>{
+            if (keys.left) {
+                direction = 'west';
+                await moveX(target, -speed,{
+                    noCollide: true
+                });
+            } else if (keys.right) {
+                direction = 'east';
+                await moveX(target, speed,{
+                    noCollide: true
+                });
+            } else if (keys.up) {
+                direction = 'north';
+                await moveY(target, -speed,{
+                    noCollide: true
+                });
+            } else if (keys.down) {
+                direction = 'south';
+                await moveY(target, speed,{
+                    noCollide: true
+                });
+            }
+        }
+        if(useAwaitToMove) {
+            await moves();
+        } else {
+            moves();
         }
 
         frames(dats);
